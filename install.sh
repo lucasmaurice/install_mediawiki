@@ -44,11 +44,17 @@ sudo mariadb -u root -e "CREATE USER 'wiki'@'localhost' IDENTIFIED BY 'wiki';"
 sudo mariadb -u root -e "GRANT ALL PRIVILEGES ON * . * TO 'wiki'@'localhost';"
 sudo mariadb -u root -e "FLUSH PRIVILEGES;"
 
-echo -e "${GREEN}Installer:${NC} Will copy configuration file"
-
-# TODO
-
 echo -e "${GREEN}Installer:${NC} Will set ownership and rights"
 
 sudo chown www-data:www-data /var/www/html/ --recursive
 sudo chmod 755 /var/www/html/ --recursive
+
+echo -e "${GREEN}Installer:${NC} Will install certbot for https"
+
+sudo apt-get update
+sudo apt-get install -y software-properties-common
+sudo add-apt-repository ppa:certbot/certbot -y
+sudo apt-get update
+sudo apt-get install -y python-certbot-apache 
+
+sudo certbot --apache --domains lanets.ddns.net
