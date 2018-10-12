@@ -21,8 +21,11 @@ sudo mysql_secure_installation
 
 echo -e "${GREEN}Installer:${NC} Will install PHP"
 
-sudo apt install -y php7.0 libapache2-mod-php7.0 php7.0-mysql php-common php7.0-cli php7.0-common php7.0-json php7.0-opcache php7.0-readline php7.0-mbstring php7.0-xml
-sudo a2enmod php7.0
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:ondrej/php -y
+
+sudo apt install -y php7.1 libapache2-mod-php7.1 php7.1-mysql php-common php7.1-cli php7.1-common php7.1-json php7.1-opcache php7.1-readline php7.1-mbstring php7.1-xml
+sudo a2enmod php7.1
 
 sudo systemctl restart apache2
 sudo systemctl enable apache2
